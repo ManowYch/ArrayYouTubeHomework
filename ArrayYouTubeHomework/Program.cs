@@ -5,7 +5,7 @@ namespace ArrayYouTubeHomework
 {
     class Program
     {
-        private static int IndexChecker(int [] array, int element)
+        private static int IndexChecker(int[] array, int element)
         {
             for (int i = 0; i < array.Length; i++)
             {
@@ -16,28 +16,48 @@ namespace ArrayYouTubeHomework
             }
             return -1;
         }
+        static int Randomiser()
+        {
+            Random rnd = new Random();
+            int rand = rnd.Next(10);
+            return rand;
+        }
+        static int[] ArrayFller(int[] arr)
+        {
+            for (int i = 0; i < arr.Length; i++)
+            {
+                arr[i] = Randomiser();
+            }
+            return arr;
+        }
+        
         static void Main(string[] args)
         {
-            int [] MyArray = new int[] { 1, 2, 4234, 5345 };
-            Console.WriteLine("Введите искомый элемент");
-            bool isInt = Int32.TryParse(Console.ReadLine(),out int userElement);
-            if (isInt)
+            while (true)
             {
-               int result = IndexChecker(MyArray, userElement);
-                if (result != -1)
+                int[] MyArray = new int[10];
+                ArrayFller(MyArray);
+
+                Console.WriteLine("Введите искомый элемент");
+                bool isInt = Int32.TryParse(Console.ReadLine(), out int userElement);
+                if (isInt)
                 {
-                    Console.WriteLine(result);
+                    int result = IndexChecker(MyArray, userElement);
+                    if (result != -1)
+                    {
+                        Console.WriteLine(result);
+                    }
+                    else
+                    {
+                        Console.WriteLine("Совпадений не найдено");
+                    }
                 }
                 else
                 {
-                    Console.WriteLine("Совпадений не найдено");
+                    Console.WriteLine("Ошибка: необходимо ввести целое число");
                 }
-            }
-            else
-            {
-                Console.WriteLine("Ошибка");
-            }
-            Console.ReadLine();
+                Console.ReadLine();
+            } 
         }
     }
 }
